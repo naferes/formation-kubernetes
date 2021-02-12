@@ -1,0 +1,20 @@
+$ cd your_repertoire/kubernetes/first_app/docker
+$ cat Dockerfile
+$ cat index.js 
+$ cat package.json
+
+#### build image ###
+$ docker build .
+$ docker run -p 3000:3000 -it "id_image"
+#### test hello world with nodejs ###
+curl localhost:3000
+
+### to make image available to kubernetes, you need to push the image to docker registry, like Docker hub, ACR, ECR, etc ###
+
+## connect with docker registry ###
+$ docker login
+
+### tag image ###
+$ docker ps #show container id# 
+$ docker tag "container_id" my_user/k8s-demo-nodejs
+
