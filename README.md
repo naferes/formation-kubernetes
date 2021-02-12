@@ -22,60 +22,61 @@ $ docker run -p 3000:3000 -it "id_image"
 #### test hello world with nodejs ###
 curl localhost:3000
 
-------- to make image available to kubernetes, you need to push the image to docker registry, like Docker hub, ACR, ECR, etc ----
+### to make image available to kubernetes, you need to push the image to docker registry, like Docker hub, ACR, ECR, etc ###
 
------ connect with docker registry --------------
+## connect with docker registry ###
 $ docker login
 
---------- tag image ----------------
+### tag image ###
 $ docker ps #show container id# 
 $ docker tag "container_id" my_user/k8s-demo-nodejs
 $ docker push my_user/k8s-demo-nodejs
------------- first pod ----------------
----------------- create helloworld.yml --------------
+##### first pod ###
+##### create helloworld.yml ####"
 $ cd ../k8s
 $ cat helloworld.yml
 $ kubectl create -f hellowrld.yml
 $ kubectl get pod
 $ kubectl describe pod nodehelloworld.example.com
-------------- use port forward ------------------
+### use port forward ##
 $ kubectl port-forward nodehelloworld.example.com 8081:3000
 $ curl localhost:8081
------------------ expose pod -------------------
+#### expose pod ####
 $ kuebctl expose pod nodehelloworld.example.com --type=NodePort --name nodehelloworld-service
----------------- url & ip to connecte -----------------
+#### url & ip to connecte ##
 $ minikube service nodehelloworld-service --url
------------------ get service--------------------
+## get service ##
 $ kubectl get service
--------------- execute some cmd with kubectl ------------
+### execute some cmd with kubectl ###
 $ kubectl get sevice
------------- kubectl attach to see process ------------
+### kubectl attach to see process ###
 $ kubectl attach nodehelloworld.example.com 
------------ execute cmd in container --------------
+### execute cmd in container ###
 $ kubectl exec nodehelloworld.example.com -- ls /app
-------------- create replication controller --------------
+##### create replication controller ###
 $ cat helloworld-repl-controller.yml
 $ kubectl create -f helloworld-repl-controller.yml
 $ kubectl get pods
 $ kubectl get rc
 $ kuebctl describe pod "nom_pod"
 $ kubectl describe rc helloworld-controller
---------------- scale replication --------------
+##### scale replication ######
 $ kubectl scale --replicas=4 -f helloworld-repl-controller.yml
 $ kubectl get rc
 $ kubectl get pods
----------------- delete replication ----------
+##### delete replication ####
 $ kubectl delete rc/helloworld-controller
----------------deployment -----------------
+##### deployment #####
 $ cd ../deployment
 $ cat helloworld.yml
 $ kubectl create -f helloworld.yml 
 $ kubectl get deployments
-------------- show replicas set ------------
+#### show replicas set ###
 $ kubectl get rs
 $ kubectl get pods
------------ show labels -------------
+#### show labels #####
 $ kubectl get pods --show-labels
 #### 
+
 
 
