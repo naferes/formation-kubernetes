@@ -3,6 +3,7 @@
   - You will need Container or virtual machine manager, such as: Docker, Hyperkit, Hyper-V, KVM, Parallels, Podman, VirtualBox, or VMWare
   - You can download minikube from https://minikube.sigs.k8s.io/docs/start/
   - To launch your cluster you just need to enter (in a shell / terminal / powershell) :
+  - useful kubct commands https://kubernetes.io/fr/docs/reference/kubectl/cheatsheet/
     `$ minikube start --driver=<Driver>`
 
 # Kubectl
@@ -22,6 +23,7 @@ $ cat package.json
 Build image 
 ```sh
 $ docker build .
+$ get docker image id using docker images
 $ docker run -p 3000:3000 -it "id_image"
 ```
 Test hello world with nodejs
@@ -37,7 +39,7 @@ $ docker login
 Tag image 
 ```sh
 $ docker ps  
-$ docker tag "container_id" my_user/k8s-demo-nodejs
+$ docker tag "image_id" my_user/k8s-demo-nodejs
 $ docker push my_user/k8s-demo-nodejs
 ```
 First pod 
@@ -45,7 +47,7 @@ Create helloworld.yml
 ```sh
 $ cd ../k8s
 $ cat helloworld.yml
-$ kubectl create -f hellowrld.yml
+$ kubectl create -f helloworld.yml
 $ kubectl get pod
 $ kubectl describe pod nodehelloworld.example.com
 ```
@@ -56,7 +58,11 @@ $ curl localhost:8081
 ```
 Expose pod 
 ```sh
-$ kuebctl expose pod nodehelloworld.example.com --type=NodePort --name nodehelloworld-service
+$ kubectl expose pod nodehelloworld.example.com --type=NodePort --name nodehelloworld-service
+Récupérer l'URL interne minikube ainsi que le port surlequel il est exposé. Comme on n'a pas forcé de NodePort, le port
+est libre.
+$ minikube service  nodehelloworld-service --url
+Cela renvoie par exemple : http://192.168.64.2:30824
 ```
 Url & ip to connecte 
 ```sh
@@ -103,6 +109,7 @@ $ cd ../deployment
 $ cat helloworld.yml
 $ kubectl create -f helloworld.yml 
 $ kubectl get deployments
+
 ```
 Show replicas set 
 ```sh
