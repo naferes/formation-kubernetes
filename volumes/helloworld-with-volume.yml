@@ -1,7 +1,8 @@
+ls
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: helloworld-deployment
+  name: helloworld-deploymen-volume
 spec:
   replicas: 1
   selector:
@@ -14,7 +15,7 @@ spec:
     spec:
       containers:
       - name: k8s-demo
-        image: iddocker98/k8s-demo-nodejs
+        image: 12011/k8s-demo-nodejs
         ports:
         - name: nodejs-port
           containerPort: 3000

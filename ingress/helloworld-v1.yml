@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: k8s-demo
-        image: iddocker98/k8s-demo-nodejs:latest
+        image: 12011/k8s-demo-nodejs:latest
         ports:
         - name: nodejs-port
           containerPort: 3000
